@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 def suma_numeros():
     """Ejercicio 1: Suma de números usando reduce."""
     print("=" * 70)
@@ -81,7 +82,7 @@ def comparacion_reduce_vs_alternativas():
     suma_reduce = reduce(lambda x, y: x + y, numeros)
     suma_builtin = sum(numeros)
     concat_reduce = reduce(lambda x, y: x + y, palabras)
-    concat_join = ''.join(palabras)
+    concat_join = "".join(palabras)
 
     print(f"\nSuma con reduce: {suma_reduce}")
     print(f"Suma con sum():  {suma_builtin}")
