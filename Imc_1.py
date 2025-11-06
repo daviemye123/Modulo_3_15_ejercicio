@@ -55,8 +55,8 @@ def calcular_peso_ideal(altura: float) -> tuple:
     Returns:
         tuple: (peso_minimo, peso_maximo) en kg
     """
-    peso_min = 18.5 * (altura ** 2)
-    peso_max = 24.9 * (altura ** 2)
+    peso_min = 18.5 * (altura**2)
+    peso_max = 24.9 * (altura**2)
     return peso_min, peso_max
 
 
@@ -65,7 +65,7 @@ def calcular_imc(peso: float, altura: float) -> float:
     if peso <= 0 or altura <= 0:
         raise ValueError("El peso y la altura deben ser valores positivos")
 
-    imc = peso / altura ** 2
+    imc = peso / altura**2
     return imc
 
 
@@ -80,11 +80,9 @@ def validar_datos(peso: float, altura: float) -> bool:
     return True
 
 
-
 def main():
     """Función principal para interactuar con el usuario."""
     print("Calculadora de IMC (Índice de Masa Corporal)")
-
 
     try:
         peso_str = input("Ingrese su peso en kilogramos: ")
@@ -108,16 +106,12 @@ def main():
         print(f"estado: {mensaje}")
         print(f"Riesgo de Salud: {riesgo}")
 
-
-        print(f"Rango de peso saludable para su altura:")
+        print("Rango de peso saludable para su altura:")
         print(f"  Mínimo: {peso_min:.1f} kg")
         print(f"  Máximo: {peso_max:.1f} kg")
 
-
-
     except ValueError:
         print("\n Error datos invalido, validar peso y altura sean validos.")
-
 
 
 if __name__ == "__main__":
