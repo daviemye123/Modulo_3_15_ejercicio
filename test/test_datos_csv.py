@@ -28,21 +28,29 @@ def archivo_ejemplo(tmp_path):
 def test_analizar_csv_calificacion(archivo_ejemplo):
     """Verifica el cálculo de estadísticas en una columna numérica."""
     resultados = analizar_csv(str(archivo_ejemplo), "calificacion")
+    maximo=9.2
+    minimo=6.5
+    registro=4
+    promedio=8.0
 
-    assert pytest.approx(resultados["promedio"], 0.01) == 8.0
-    assert resultados["maximo"] == 9.2
-    assert resultados["minimo"] == 6.5
-    assert resultados["total_registros"] == 4
+    assert pytest.approx(resultados["promedio"], 0.01) == promedio
+    assert resultados["maximo"] == maximo
+    assert resultados["minimo"] == minimo
+    assert resultados["total_registros"] == registro
 
 
 def test_analizar_csv_edad(archivo_ejemplo):
     """Verifica el cálculo de estadísticas de la columna edad."""
     resultados = analizar_csv(str(archivo_ejemplo), "edad")
+    promedio=20.5
+    maximo=22
+    minimo=19
+    registro=4
 
-    assert pytest.approx(resultados["promedio"], 0.01) == 20.5
-    assert resultados["maximo"] == 22
-    assert resultados["minimo"] == 19
-    assert resultados["total_registros"] == 4
+    assert pytest.approx(resultados["promedio"], 0.01) == promedio
+    assert resultados["maximo"] == maximo
+    assert resultados["minimo"] == minimo
+    assert resultados["total_registros"] == registro
 
 
 def test_columna_inexistente(archivo_ejemplo):

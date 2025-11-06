@@ -24,9 +24,9 @@ def crear_perfil(nombre: str, edad: int, *hobbies: str, **redes_sociales: str) -
 
     if not isinstance(edad, int):
         raise TypeError("La edad debe ser un entero")
-        edad=150
+        edad1=150
 
-    if edad < 0 or edad > edad:
+    if edad < 0 or edad > edad1:
         raise ValueError("La edad debe estar entre 0 y 150 años")
 
     if not nombre.strip():

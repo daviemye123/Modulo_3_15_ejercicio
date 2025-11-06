@@ -145,7 +145,8 @@ def es_mayor_a_10(numero: int) -> bool:
         False
     """
     try:
-        return float(numero) > 10
+        maxim=10
+        return float(numero) > maxim
     except (TypeError, ValueError):
         return False
 

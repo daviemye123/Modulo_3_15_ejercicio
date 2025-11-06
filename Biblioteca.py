@@ -401,7 +401,8 @@ def main() -> None:
         elif opcion == "6":
             if Confirm.ask("\n¿Está seguro que desea salir?"):
                 console.print(
-                    "\n[bold green]¡Gracias por usar el sistema de biblioteca![/bold green]\n"
+                    "\n[bold green]¡Gracias por usar el sistema de biblioteca!"
+                    "[/bold green]\n"
                 )
                 break
 

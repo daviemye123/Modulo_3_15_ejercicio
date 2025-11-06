@@ -40,7 +40,8 @@ def analizar_csv(nombre_archivo: str, columna: str) -> dict:
 
         if lector.fieldnames is None:
             raise ValueError(
-                f"El archivo '{nombre_archivo}' está vacío o mal formado (no tiene encabezados)."
+                f"El archivo '{nombre_archivo}"
+                f"' está vacío o mal formado (no tiene encabezados)."
             )
 
         if columna not in lector.fieldnames:
@@ -56,7 +57,8 @@ def analizar_csv(nombre_archivo: str, columna: str) -> dict:
                 valores.append(valor)
             except (ValueError, TypeError):
                 console.print(
-                    f"[yellow]⚠ Advertencia: Valor no numérico ignorado: '{valor_celda}'[/yellow]"
+                    f"[yellow]⚠ Advertencia: Valor no numérico ignorado: '"
+                    f"{valor_celda}'[/yellow]"
                 )
 
     if not valores:
