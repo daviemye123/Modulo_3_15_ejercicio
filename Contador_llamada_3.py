@@ -42,7 +42,7 @@ def main():
         print(f"El contador actual es: {valor_actual}")
 
         if limite_conteo(valor_actual, limite=4):
-            print("¡Límite de 4 alcanzado!")
+            print("límite de 4 alcanzado")
             break
 
 if __name__ == "__main__":
