@@ -1,4 +1,3 @@
-import pytest
 from Explorar_datos_10 import explorar_estructura
 
 
@@ -28,7 +27,7 @@ def test_explorar_lista_plana(capsys):
     estructura = [1, 2]
     explorar_estructura(estructura)
     captura = capsys.readouterr()
-    output = captura.out.strip().split('\n')
+    output = captura.out.strip().split("\n")
     assert "Valor: 1, Profundidad: 2" in output
     assert "Valor: 2, Profundidad: 2" in output
 
@@ -38,7 +37,7 @@ def test_explorar_lista_anidada(capsys):
     estructura = [1, [2, [3]]]
     explorar_estructura(estructura)
     captura = capsys.readouterr()
-    output = captura.out.strip().split('\n')
+    output = captura.out.strip().split("\n")
 
     assert "Valor: 1, Profundidad: 2" in output
     assert "Valor: 2, Profundidad: 3" in output
@@ -50,7 +49,7 @@ def test_explorar_diccionario_plano(capsys):
     estructura = {"a": 1, "b": "dos"}
     explorar_estructura(estructura)
     captura = capsys.readouterr()
-    output = captura.out.strip().split('\n')
+    output = captura.out.strip().split("\n")
 
     assert "Clave: a, Profundidad: 2" in output
     assert "Valor: 1, Profundidad: 2" in output
@@ -63,13 +62,12 @@ def test_explorar_diccionario_anidado(capsys):
     estructura = {"config": [True, False]}
     explorar_estructura(estructura)
     captura = capsys.readouterr()
-    output = captura.out.strip().split('\n')
+    output = captura.out.strip().split("\n")
 
     assert "Clave: config, Profundidad: 2" in output
 
     assert "Valor: True, Profundidad: 3" in output
     assert "Valor: False, Profundidad: 3" in output
-
 
 
 def test_explorar_estructura_compleja(capsys):
@@ -81,7 +79,7 @@ def test_explorar_estructura_compleja(capsys):
     ]
     explorar_estructura(estructura)
     captura = capsys.readouterr()
-    output = captura.out.strip().split('\n')
+    output = captura.out.strip().split("\n")
 
     assert "Valor: 1, Profundidad: 2" in output
 

@@ -1,13 +1,16 @@
 import os
+
 import pytest
+
 from Gestor_tarea_archivo_txt import (
+    ARCHIVO_TAREAS,
     agregar_tarea,
-    ver_tareas,
-    marcar_completada,
     eliminar_tarea,
     limpiar_completadas,
-    ARCHIVO_TAREAS
+    marcar_completada,
+    ver_tareas,
 )
+
 
 @pytest.fixture(autouse=True)
 def limpiar_archivo():

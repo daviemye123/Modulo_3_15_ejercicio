@@ -1,8 +1,7 @@
-import pytest
 from Contador_llamada_3 import crear_contador, limite_conteo
 
-
 # --- Pruebas para crear_contador --- #
+
 
 def test_crear_contador_incrementa_correctamente():
     """Prueba que el contador incremente correctamente en cada llamada."""
@@ -30,6 +29,7 @@ def test_crear_contador_es_independiente():
 
 
 # --- Pruebas para limite_conteo --- #
+
 
 def test_limite_conteo_alcanza_limite():
     """Prueba que limite_conteo devuelva True al llegar al límite."""

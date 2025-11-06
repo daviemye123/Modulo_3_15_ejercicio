@@ -1,6 +1,7 @@
-import os
-import pytest
 import csv
+
+import pytest
+
 from Datos_csv import analizar_csv, crear_csv_ejemplo
 
 
@@ -15,7 +16,7 @@ def archivo_ejemplo(tmp_path):
         {"nombre": "Juan", "edad": "21", "calificacion": "6.5"},
     ]
 
-    with open(archivo, "w", newline='', encoding="utf-8") as f:
+    with open(archivo, "w", newline="", encoding="utf-8") as f:
         campos = ["nombre", "edad", "calificacion"]
         escritor = csv.DictWriter(f, fieldnames=campos)
         escritor.writeheader()
@@ -59,7 +60,7 @@ def test_archivo_inexistente():
 def test_valores_no_numericos(tmp_path):
     """Debe ignorar valores no numéricos y lanzar error si no hay ninguno válido."""
     archivo = tmp_path / "test_invalidos.csv"
-    with open(archivo, "w", newline='', encoding="utf-8") as f:
+    with open(archivo, "w", newline="", encoding="utf-8") as f:
         escritor = csv.DictWriter(f, fieldnames=["nombre", "edad"])
         escritor.writeheader()
         escritor.writerow({"nombre": "Ana", "edad": "abc"})  # no numérico

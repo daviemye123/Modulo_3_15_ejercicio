@@ -1,6 +1,8 @@
-import pytest
-from io import StringIO
 from contextlib import redirect_stdout
+from io import StringIO
+
+import pytest
+
 import Filtrado_estudiantes_filter_7
 
 

@@ -1,11 +1,13 @@
 import pytest
+
 from Imc_1 import (
-    clasificar_riesgo,
-    clasificar_imc,
-    calcular_peso_ideal,
     calcular_imc,
+    calcular_peso_ideal,
+    clasificar_imc,
+    clasificar_riesgo,
     validar_datos,
 )
+
 
 def test_clasificar_riesgo_limites():
     """Prueba los límites de las clasificaciones de riesgo."""
@@ -35,8 +37,6 @@ def test_clasificar_riesgo_limites():
     assert clasificar_riesgo(50.0) == "Obesidad clase 3"
 
 
-
-
 def test_clasificar_imc_peso_saludable():
     """Prueba el rango de peso saludable (18.5 - 24.9)."""
     assert clasificar_imc(18.5) == "IMC 18.50 ,peso saludabel"
@@ -59,8 +59,8 @@ def test_clasificar_imc_sobre_peso():
 def test_calcular_peso_ideal_ejemplo():
     """Prueba el cálculo con una altura estándar (e.g., 1.75m)."""
     altura = 1.75
-    peso_min_esperado = 18.5 * (altura ** 2)
-    peso_max_esperado = 24.9 * (altura ** 2)
+    peso_min_esperado = 18.5 * (altura**2)
+    peso_max_esperado = 24.9 * (altura**2)
 
     peso_min, peso_max = calcular_peso_ideal(altura)
 
@@ -76,13 +76,12 @@ def test_calcular_peso_ideal_limite():
     assert peso_max == pytest.approx(55.025)
 
 
-
 def test_calcular_imc_normal():
     """Prueba el cálculo del IMC con valores válidos."""
 
     peso = 70.0
     altura = 1.75
-    imc_esperado = 70.0 / (1.75 ** 2)
+    imc_esperado = 70.0 / (1.75**2)
     assert calcular_imc(peso, altura) == pytest.approx(imc_esperado)
 
 
@@ -101,8 +100,6 @@ def test_calcular_imc_valores_cero_o_negativos():
         calcular_imc(-70.0, 1.75)
     with pytest.raises(ValueError):
         calcular_imc(70.0, -1.75)
-
-
 
 
 def test_validar_datos_valido():

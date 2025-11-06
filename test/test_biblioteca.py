@@ -22,6 +22,7 @@ from Biblioteca import (
     ver_todos_los_libros,
 )
 
+
 @pytest.fixture
 def archivo_temporal(tmp_path):
     """Crea un archivo temporal para las pruebas."""
@@ -65,7 +66,6 @@ def libros_con_datos():
     ]
 
 
-
 def test_crea_biblioteca_con_libros():
     """Verifica que se cree una biblioteca con libros."""
     libros = crear_biblioteca_inicial()
@@ -92,7 +92,6 @@ def test_libros_inicialmente_disponibles():
         assert libro["fecha_prestamo"] is None
 
 
-
 def test_carga_archivo_existente(archivo_temporal, libros_con_datos):
     """Verifica que se carguen datos de un archivo existente."""
     # Guardar datos primero
@@ -111,7 +110,6 @@ def test_crea_archivo_si_no_existe(archivo_temporal):
     assert len(libros) > 0
 
 
-
 def test_guarda_datos_correctamente(archivo_temporal, libros_con_datos):
     """Verifica que los datos se guarden correctamente."""
     guardar_datos(libros_con_datos, archivo_temporal)
@@ -125,7 +123,6 @@ def test_guarda_datos_correctamente(archivo_temporal, libros_con_datos):
 
     assert len(datos) == 3
     assert datos[0]["titulo"] == "Test Book 1"
-
 
 
 def test_buscar_libro_existente(libros_con_datos):
@@ -145,7 +142,6 @@ def test_buscar_en_lista_vacia(libros_vacios):
     """Verifica búsqueda en lista vacía."""
     libro = buscar_libro_por_id(libros_vacios, "001")
     assert libro is None
-
 
 
 def test_prestar_libro_disponible(archivo_temporal, libros_con_datos):
@@ -227,8 +223,6 @@ def test_persistencia_devolucion(archivo_temporal, libros_con_datos):
     assert libro["prestado_a"] is None
 
 
-
-
 def test_buscar_por_titulo_exacto(libros_con_datos):
     """Verifica búsqueda por título exacto."""
     resultados = buscar_libro(libros_con_datos, "Test Book 1")
@@ -267,8 +261,6 @@ def test_buscar_por_palabra_clave(libros_con_datos):
     assert "Python" in resultados[0]["titulo"]
 
 
-
-
 def test_ver_libros_prestados(libros_con_datos):
     """Verifica que se filtren solo los libros prestados."""
     prestados = ver_libros_prestados(libros_con_datos)
@@ -291,8 +283,6 @@ def test_ver_multiples_prestados(archivo_temporal, libros_con_datos):
 
     prestados = ver_libros_prestados(libros_con_datos)
     assert len(prestados) == 3
-
-
 
 
 def test_ver_todos_los_libros(libros_con_datos):
@@ -319,7 +309,6 @@ def test_flujo_completo_prestamo_devolucion(archivo_temporal):
     prestados = ver_libros_prestados(libros)
     assert len(prestados) == 1
 
-
     assert devolver_libro(libros, "001", archivo_temporal) is True
 
     # Verificar devolución
@@ -336,11 +325,9 @@ def test_multiples_operaciones(archivo_temporal, libros_con_datos):
     prestados = ver_libros_prestados(libros_con_datos)
     assert len(prestados) == 3
 
-
     devolver_libro(libros_con_datos, "001", archivo_temporal)
     devolver_libro(libros_con_datos, "002", archivo_temporal)
     devolver_libro(libros_con_datos, "003", archivo_temporal)
-
 
     prestados = ver_libros_prestados(libros_con_datos)
     assert len(prestados) == 0
