@@ -88,9 +88,7 @@ def cargar_datos(archivo: str = ARCHIVO_BIBLIOTECA) -> list[dict]:
         if archivo_path.exists():
             with open(archivo_path, encoding="utf-8") as f:
                 libros = json.load(f)
-            console.print(
-                f"[green]✓[/green] Biblioteca cargada: {len(libros)} libros"
-            )
+            console.print(f"[green]✓[/green] Biblioteca cargada: {len(libros)} libros")
             return libros
         else:
             libros = crear_biblioteca_inicial()
@@ -141,7 +139,10 @@ def buscar_libro_por_id(libros: list[dict], libro_id: str) -> dict | None:
 
 
 def prestar_libro(
-    libros: list[dict], libro_id: str, nombre_aprendiz: str, archivo: str = ARCHIVO_BIBLIOTECA
+    libros: list[dict],
+    libro_id: str,
+    nombre_aprendiz: str,
+    archivo: str = ARCHIVO_BIBLIOTECA,
 ) -> bool:
     """
     Marca un libro como prestado a un aprendiz.
@@ -201,8 +202,7 @@ def devolver_libro(
 
     if libro["prestado_a"] is None:
         console.print(
-            f"[yellow]⚠[/yellow] El libro '{libro['titulo']}' "
-            "no está prestado."
+            f"[yellow]⚠[/yellow] El libro '{libro['titulo']}' no está prestado."
         )
         return False
 
@@ -238,9 +238,7 @@ def buscar_libro(libros: list[dict], query: str) -> list[dict]:
     ]
 
     if not resultados:
-        console.print(
-            f"[yellow]⚠[/yellow] No se encontraron libros con: '{query}'"
-        )
+        console.print(f"[yellow]⚠[/yellow] No se encontraron libros con: '{query}'")
         return []
 
     mostrar_libros(resultados, f"Resultados de búsqueda: '{query}'")
