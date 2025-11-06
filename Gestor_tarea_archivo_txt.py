@@ -3,12 +3,13 @@ Gestor de Tareas - Aplicación de Consola
 Permite agregar, ver, eliminar y marcar tareas como completadas
 """
 
+import os
+
+from rich import box
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
 from rich.prompt import Prompt
-from rich import box
-import os
+from rich.table import Table
 
 # Inicializar consola de Rich
 console = Console()
@@ -25,10 +26,10 @@ def agregar_tarea(tarea: str) -> None:
         tarea: Texto de la tarea a agregar
     """
     try:
-        with open(ARCHIVO_TAREAS, 'a', encoding='utf-8') as archivo:
+        with open(ARCHIVO_TAREAS, "a", encoding="utf-8") as archivo:
             # Agregar la tarea con un salto de línea
             archivo.write(f"[ ] {tarea}\n")
-        console.print(f"✓ Tarea agregada exitosamente", style="bold green")
+        console.print("✓ Tarea agregada exitosamente", style="bold green")
     except Exception as e:
         console.print(f"✗ Error al agregar tarea: {e}", style="bold red")
 
@@ -45,7 +46,7 @@ def ver_tareas() -> list[str]:
         if not os.path.exists(ARCHIVO_TAREAS):
             return []
 
-        with open(ARCHIVO_TAREAS, 'r', encoding='utf-8') as archivo:
+        with open(ARCHIVO_TAREAS, "r", encoding="utf-8") as archivo:
             # Leer todas las líneas y eliminar espacios en blanco
             tareas = [linea.strip() for linea in archivo.readlines()]
             # Filtrar líneas vacías
@@ -62,18 +63,20 @@ def mostrar_tareas() -> None:
     tareas = ver_tareas()
 
     if not tareas:
-        console.print(Panel(
-            "[yellow]No hay tareas registradas[/yellow]",
-            title="📋 Lista de Tareas",
-            border_style="yellow"
-        ))
+        console.print(
+            Panel(
+                "[yellow]No hay tareas registradas[/yellow]",
+                title="📋 Lista de Tareas",
+                border_style="yellow",
+            )
+        )
         return
 
     tabla = Table(
         title="📋 Lista de Tareas",
         box=box.ROUNDED,
         show_header=True,
-        header_style="bold cyan"
+        header_style="bold cyan",
     )
 
     tabla.add_column("#", style="dim", width=6, justify="center")
@@ -92,11 +95,7 @@ def mostrar_tareas() -> None:
         # Extraer el texto de la tarea (sin el [ ] o [X])
         texto_tarea = tarea[3:].strip()
 
-        tabla.add_row(
-            str(i),
-            estado,
-            f"[{estilo_tarea}]{texto_tarea}[/{estilo_tarea}]"
-        )
+        tabla.add_row(str(i), estado, f"[{estilo_tarea}]{texto_tarea}[/{estilo_tarea}]")
 
     console.print(tabla)
     console.print(f"\n[dim]Total de tareas: {len(tareas)}[/dim]")
@@ -116,7 +115,10 @@ def eliminar_tarea(numero: int) -> None:
         return
 
     if numero < 1 or numero > len(tareas):
-        console.print(f"✗ Número de tarea inválido. Debe ser entre 1 y {len(tareas)}", style="bold red")
+        console.print(
+            f"✗ Número de tarea inválido. Debe ser entre 1 y {len(tareas)}",
+            style="bold red",
+        )
         return
 
     try:
@@ -124,11 +126,13 @@ def eliminar_tarea(numero: int) -> None:
         tarea_eliminada = tareas.pop(numero - 1)
 
         # Reescribir el archivo con las tareas restantes
-        with open(ARCHIVO_TAREAS, 'w', encoding='utf-8') as archivo:
+        with open(ARCHIVO_TAREAS, "w", encoding="utf-8") as archivo:
             for tarea in tareas:
                 archivo.write(f"{tarea}\n")
 
-        console.print(f"✓ Tarea eliminada: {tarea_eliminada[3:].strip()}", style="bold green")
+        console.print(
+            f"✓ Tarea eliminada: {tarea_eliminada[3:].strip()}", style="bold green"
+        )
     except Exception as e:
         console.print(f"✗ Error al eliminar tarea: {e}", style="bold red")
 
@@ -147,7 +151,10 @@ def marcar_completada(numero: int) -> None:
         return
 
     if numero < 1 or numero > len(tareas):
-        console.print(f"✗ Número de tarea inválido. Debe ser entre 1 y {len(tareas)}", style="bold red")
+        console.print(
+            f"✗ Número de tarea inválido. Debe ser entre 1 y {len(tareas)}",
+            style="bold red",
+        )
         return
 
     try:
@@ -157,11 +164,11 @@ def marcar_completada(numero: int) -> None:
             tareas[numero - 1] = tarea_actual.replace("[ ]", "[X]", 1)
 
             # Reescribir el archivo
-            with open(ARCHIVO_TAREAS, 'w', encoding='utf-8') as archivo:
+            with open(ARCHIVO_TAREAS, "w", encoding="utf-8") as archivo:
                 for tarea in tareas:
                     archivo.write(f"{tarea}\n")
 
-            console.print(f"✓ Tarea marcada como completada", style="bold green")
+            console.print("✓ Tarea marcada como completada", style="bold green")
         else:
             console.print("⚠ La tarea ya está completada", style="bold yellow")
     except Exception as e:
@@ -173,7 +180,9 @@ def limpiar_completadas() -> None:
     Elimina todas las tareas marcadas como completadas.
     """
     tareas = ver_tareas()
-    tareas_pendientes = [t for t in tareas if not (t.startswith("[X]") or t.startswith("[x]"))]
+    tareas_pendientes = [
+        t for t in tareas if not (t.startswith("[X]") or t.startswith("[x]"))
+    ]
 
     cantidad_eliminadas = len(tareas) - len(tareas_pendientes)
 
@@ -182,11 +191,14 @@ def limpiar_completadas() -> None:
         return
 
     try:
-        with open(ARCHIVO_TAREAS, 'w', encoding='utf-8') as archivo:
+        with open(ARCHIVO_TAREAS, "w", encoding="utf-8") as archivo:
             for tarea in tareas_pendientes:
                 archivo.write(f"{tarea}\n")
 
-        console.print(f"✓ Se eliminaron {cantidad_eliminadas} tarea(s) completada(s)", style="bold green")
+        console.print(
+            f"✓ Se eliminaron {cantidad_eliminadas} tarea(s) completada(s)",
+            style="bold green",
+        )
     except Exception as e:
         console.print(f"✗ Error al limpiar tareas: {e}", style="bold red")
 
@@ -204,7 +216,7 @@ def mostrar_menu() -> None:
 [cyan bold]6.[/cyan bold] Salir""",
         title="[bold magenta]📝 GESTOR DE TAREAS[/bold magenta]",
         border_style="magenta",
-        box=box.DOUBLE
+        box=box.DOUBLE,
     )
     console.print(menu)
 
@@ -222,7 +234,7 @@ def main() -> None:
         opcion = Prompt.ask(
             "\n[bold cyan]Selecciona una opción[/bold cyan]",
             choices=["1", "2", "3", "4", "5", "6"],
-            default="2"
+            default="2",
         )
 
         console.print()  # Línea en blanco
