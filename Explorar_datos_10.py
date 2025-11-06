@@ -16,7 +16,6 @@ def explorar_estructura(elemento: Any, profundidad: int = 1) -> None:
         print(f"Valor: {elemento}, Profundidad: {profundidad}")
         return
 
-
     if isinstance(elemento, (list, tuple)):
         for item in elemento:
             explorar_estructura(item, profundidad + 1)
@@ -28,12 +27,7 @@ def explorar_estructura(elemento: Any, profundidad: int = 1) -> None:
             explorar_estructura(value, profundidad + 1)
 
 
-estructura_anidada = [
-    1,
-    [2, 3, "Hola"],
-    {"a": 4, "b": (5.5, None)},
-    [{"clave": [6]}]
-]
+estructura_anidada = [1, [2, 3, "Hola"], {"a": 4, "b": (5.5, None)}, [{"clave": [6]}]]
 
 print("Exploración de Estructura Anidada ")
 explorar_estructura(estructura_anidada)
