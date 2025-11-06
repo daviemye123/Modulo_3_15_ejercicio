@@ -32,8 +32,8 @@ def test_actualizar_iva_cambio_correcto():
     actualizar_iva(nueva_tasa)
 
     # Verificamos directamente en el módulo
-    import Calculadora_impuestos_5
-    assert Calculadora_impuestos_5.TASA_IVA == nueva_tasa
+    import Calculadora_impuesto
+    assert Calculadora_impuesto.TASA_IVA == nueva_tasa
     assert calcular_iva(100.00) == pytest.approx(25.00)
 
 
