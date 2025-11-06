@@ -1,10 +1,10 @@
 import csv
 import json
-from typing import List, Dict
+from typing import Dict, List
+
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
-from rich.text import Text
+from rich.table import Table
 
 console = Console()
 
@@ -21,11 +21,14 @@ def leer_csv(archivo: str) -> List[Dict]:
     """
     estudiantes = []
     try:
-        with open(archivo, 'r', encoding='utf-8') as f:
+        with open(archivo, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 estudiantes.append(row)
-        console.print(f"[green]✓[/green] Archivo CSV leído exitosamente: {len(estudiantes)} estudiantes cargados")
+        console.print(
+            f"[green]✓[/green] Archivo CSV leído exitosamente: {len(estudiantes)} "
+            f"estudiantes cargados"
+        )
     except FileNotFoundError:
         console.print(f"[red]✗[/red] Error: No se encontró el archivo {archivo}")
     except Exception as e:
@@ -46,9 +49,12 @@ def leer_json(archivo: str) -> List[Dict]:
     """
     cursos = []
     try:
-        with open(archivo, 'r', encoding='utf-8') as f:
+        with open(archivo, "r", encoding="utf-8") as f:
             cursos = json.load(f)
-        console.print(f"[green]✓[/green] Archivo JSON leído exitosamente: {len(cursos)} cursos cargados")
+        console.print(
+            f"[green]✓[/green] Archivo JSON leído exitosamente: {len(cursos)} "
+            f"cursos cargados"
+        )
     except FileNotFoundError:
         console.print(f"[red]✗[/red] Error: No se encontró el archivo {archivo}")
     except json.JSONDecodeError as e:
@@ -71,17 +77,17 @@ def combinar_datos(estudiantes: List[Dict], cursos: List[Dict]) -> Dict[str, Dic
         Diccionario con estudiantes y sus cursos asociados
     """
     # Crear un diccionario de cursos por ID para búsqueda rápida
-    cursos_dict = {curso['id']: curso for curso in cursos}
+    cursos_dict = {curso["id"]: curso for curso in cursos}
 
     # Diccionario para almacenar resultado
     reporte_datos = {}
 
     for estudiante in estudiantes:
-        est_id = estudiante['id']
-        est_nombre = estudiante['nombre']
+        est_id = estudiante["id"]
+        est_nombre = estudiante["nombre"]
 
-        # Obtener los IDs de cursos del estudiante (asumiendo que vienen separados por comas)
-        cursos_ids = estudiante.get('cursos', '').split(',')
+
+        cursos_ids = estudiante.get("cursos", "").split(",")
         cursos_ids = [c.strip() for c in cursos_ids if c.strip()]
 
         # Buscar información de cada curso
@@ -91,12 +97,12 @@ def combinar_datos(estudiantes: List[Dict], cursos: List[Dict]) -> Dict[str, Dic
                 cursos_estudiante.append(cursos_dict[curso_id])
 
         reporte_datos[est_id] = {
-            'nombre': est_nombre,
-            'email': estudiante.get('email', 'N/A'),
-            'cursos': cursos_estudiante
+            "nombre": est_nombre,
+            "email": estudiante.get("email", "N/A"),
+            "cursos": cursos_estudiante,
         }
 
-    console.print(f"[green]✓[/green] Datos combinados exitosamente")
+    console.print("[green]✓[/green] Datos combinados exitosamente")
     return reporte_datos
 
 
@@ -111,10 +117,12 @@ def mostrar_reporte_rich(reporte_datos: Dict[str, Dict]) -> str:
         String con el contenido del reporte en formato texto plano
     """
     console.print("\n")
-    console.print(Panel.fit(
-        "[bold cyan]REPORTE DE ESTUDIANTES Y CURSOS[/bold cyan]",
-        border_style="cyan"
-    ))
+    console.print(
+        Panel.fit(
+            "[bold cyan]REPORTE DE ESTUDIANTES Y CURSOS[/bold cyan]",
+            border_style="cyan",
+        )
+    )
     console.print("\n")
 
     # Texto plano para guardar en archivo
@@ -124,10 +132,12 @@ def mostrar_reporte_rich(reporte_datos: Dict[str, Dict]) -> str:
 
     for est_id, datos in reporte_datos.items():
         # Mostrar en consola con Rich
-        table = Table(title=f"[bold]{datos['nombre']}[/bold] (ID: {est_id})",
-                      show_header=True,
-                      header_style="bold magenta",
-                      border_style="blue")
+        table = Table(
+            title=f"[bold]{datos['nombre']}[/bold] (ID: {est_id})",
+            show_header=True,
+            header_style="bold magenta",
+            border_style="blue",
+        )
 
         table.add_column("Curso", style="cyan", width=30)
         table.add_column("Instructor", style="green", width=20)
@@ -139,12 +149,12 @@ def mostrar_reporte_rich(reporte_datos: Dict[str, Dict]) -> str:
         texto_reporte += f"Email: {datos['email']}\n"
         texto_reporte += "-" * 70 + "\n"
 
-        if datos['cursos']:
-            for curso in datos['cursos']:
+        if datos["cursos"]:
+            for curso in datos["cursos"]:
                 table.add_row(
-                    curso.get('nombre', 'N/A'),
-                    curso.get('instructor', 'N/A'),
-                    str(curso.get('creditos', 'N/A'))
+                    curso.get("nombre", "N/A"),
+                    curso.get("instructor", "N/A"),
+                    str(curso.get("creditos", "N/A")),
                 )
 
                 texto_reporte += f"  • {curso.get('nombre', 'N/A')}\n"
@@ -160,7 +170,7 @@ def mostrar_reporte_rich(reporte_datos: Dict[str, Dict]) -> str:
 
     # Resumen
     total_estudiantes = len(reporte_datos)
-    total_cursos = sum(len(datos['cursos']) for datos in reporte_datos.values())
+    total_cursos = sum(len(datos["cursos"]) for datos in reporte_datos.values())
 
     resumen = f"[bold green]Total de estudiantes:[/bold green] {total_estudiantes}\n"
     resumen += f"[bold green]Total de inscripciones:[/bold green] {total_cursos}"
@@ -184,7 +194,9 @@ def generar_reporte(estudiantes: List[Dict], cursos: List[Dict], archivo_salida:
         archivo_salida: Nombre del archivo donde se guardará el reporte
     """
     if not estudiantes or not cursos:
-        console.print("[yellow]⚠[/yellow] No hay datos suficientes para generar el reporte")
+        console.print(
+            "[yellow]⚠[/yellow] No hay datos suficientes para generar el reporte"
+        )
         return
 
     # Combinar datos
@@ -195,23 +207,31 @@ def generar_reporte(estudiantes: List[Dict], cursos: List[Dict], archivo_salida:
 
     # Guardar en archivo
     try:
-        with open(archivo_salida, 'w', encoding='utf-8') as f:
+        with open(archivo_salida, "w", encoding="utf-8") as f:
             f.write(texto_reporte)
-        console.print(f"\n[green]✓[/green] Reporte guardado exitosamente en: [bold]{archivo_salida}[/bold]")
+        console.print(
+            f"\n[green]✓[/green] Reporte guardado exitosamente en: [bold]{archivo_salida}[/bold]"
+        )
     except Exception as e:
         console.print(f"[red]✗[/red] Error al guardar el reporte: {str(e)}")
 
 
 def main():
     """Función principal que ejecuta el proceso completo."""
-    console.print("\n[bold blue]═══════════════════════════════════════════════════════[/bold blue]")
-    console.print("[bold blue]    SISTEMA DE REPORTES - ESTUDIANTES Y CURSOS[/bold blue]")
-    console.print("[bold blue]═══════════════════════════════════════════════════════[/bold blue]\n")
+    console.print(
+        "\n[bold blue]═══════════════════════════════════════════════════════[/bold blue]"
+    )
+    console.print(
+        "[bold blue]    SISTEMA DE REPORTES - ESTUDIANTES Y CURSOS[/bold blue]"
+    )
+    console.print(
+        "[bold blue]═══════════════════════════════════════════════════════[/bold blue]\n"
+    )
 
     # Archivos de entrada y salida
-    archivo_csv = 'estudiantes.csv'
-    archivo_json = 'cursos.json'
-    archivo_reporte = 'reporte.txt'
+    archivo_csv = "estudiantes.csv"
+    archivo_json = "cursos.json"
+    archivo_reporte = "reporte.txt"
 
     console.print("[bold]Paso 1:[/bold] Leyendo datos de estudiantes...")
     estudiantes = leer_csv(archivo_csv)
