@@ -12,21 +12,13 @@ def analizar_texto(texto: str) -> dict:
     """
 
     palabras_filtradas = [
-        palabra for palabra in texto.split()
-        if len(palabra) > 5 and palabra.isupper()
+        palabra for palabra in texto.split() if len(palabra) > 5 and palabra.isupper()
     ]
 
-    diccionario_longitudes = {
-        palabra: len(palabra)
-        for palabra in palabras_filtradas
-    }
+    diccionario_longitudes = {palabra: len(palabra) for palabra in palabras_filtradas}
 
     if not diccionario_longitudes:
-        resumen = {
-            "total": 0,
-            "mas_larga": None,
-            "mas_corta": None
-        }
+        resumen = {"total": 0, "mas_larga": None, "mas_corta": None}
     else:
         palabra_larga = max(diccionario_longitudes, key=diccionario_longitudes.get)
         palabra_corta = min(diccionario_longitudes, key=diccionario_longitudes.get)
@@ -34,15 +26,14 @@ def analizar_texto(texto: str) -> dict:
         resumen = {
             "total": len(palabras_filtradas),
             "mas_larga": (palabra_larga, diccionario_longitudes[palabra_larga]),
-            "mas_corta": (palabra_corta, diccionario_longitudes[palabra_corta])
+            "mas_corta": (palabra_corta, diccionario_longitudes[palabra_corta]),
         }
 
     return {
         "palabras_filtradas": palabras_filtradas,
         "diccionario_longitudes": diccionario_longitudes,
-        "resumen": resumen
+        "resumen": resumen,
     }
-
 
 
 if __name__ == "__main__":
