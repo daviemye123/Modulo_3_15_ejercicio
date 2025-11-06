@@ -1,4 +1,4 @@
-# Encontrara 
+# Taller 15 ejercicios
 ejercicios resueltos con sus respectivos test 
 # nota
 cuando vaya a ejecutar los test hacerlo de manera se parada o bn en mi caso me toco ejecutarlos asi 
@@ -7,24 +7,38 @@ cuando vaya a ejecutar los test hacerlo de manera se parada o bn en mi caso me t
 
 Sistema profesional de consola para gestionar préstamos de libros en una biblioteca, desarrollado con las mejores prácticas de Python.
 
-## ✨ Características
+##  Características
 
-- **Préstamo de libros**: Asignar libros a aprendices
-- **Devolución de libros**: Marcar libros como disponibles
-- **Búsqueda avanzada**: Buscar por título o autor
-- **Visualización de prestados**: Ver todos los libros prestados actualmente
-- **Catálogo completo**: Consultar todos los libros disponibles
-- **Persistencia en JSON**: Los datos se guardan automáticamente
-- **Interfaz atractiva**: Tablas y menús coloridos con Rich
+- **Calcular imc **:Segun peso y altura
+- **Generador de pefiles de usuario
+- **Contadopr de llamada
+- **Validacion de datos genericos 
+- **Procesamiento de datos 
+- **Filtrado de estudiantes
+- **Transformacion de datos con list
+- **Sumatoria con reduce 
+- **Explorador de datos
+- **Gestor tareas com txt
+- **Analizador de datos con csv
+- **Inventario con json
+- **Generador de reportes con archivos multiples
+- **Sistema de biblioteca 
+- **Préstamo de libros
+- **Devolución de libros
+- **Búsqueda avanzada
+- **Visualización de prestados
+- **Catálogo completo
+- **Persistencia en JSON
+- **Interfaz atractiva
 
-## 🛠️ Tecnologías y Herramientas
+## ️ Tecnologías y Herramientas
 
-- **Python 3.10+**: Lenguaje de programación
+- **Python **: Lenguaje de programación
 - **Rich**: Interfaz de consola elegante
 - **uv**: Gestor de paquetes rápido
 - **Ruff**: Linter y formateador
 - **pytest**: Framework de testing
-- **Type Hints**: Tipado estático para mejor calidad
+
 
 ## 📦 Instalación
 
@@ -60,15 +74,11 @@ python biblioteca.py
 5. **Ver todos los libros**: Muestra el catálogo completo
 6. **Salir**: Cierra la aplicación
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 
 pytest
-
-
-pytest --cov
-
 
 ```
 
@@ -77,12 +87,6 @@ pytest --cov
 ```bash
 
 ruff check .
-
-
-ruff format .
-
-
-ruff check --fix .
 ```
 
 
@@ -107,7 +111,7 @@ Cumple con PEP 8 y las mejores prácticas de Python.
 - Cobertura de código automática
 - Tests verbosos por defecto
 
-## 🤝 Contribución
+##  Contribución
 
 1. Asegúrate de que todos los tests pasen: `pytest`
 2. Verifica el código con Ruff: `ruff check .`
