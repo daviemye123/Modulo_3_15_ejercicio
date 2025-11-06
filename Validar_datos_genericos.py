@@ -11,10 +11,10 @@ Conceptos aplicados:
 - Reutilización de código
 """
 
-from typing import Callable, List, Any, TypeVar
 import re
+from typing import Any, Callable, TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def aplicar_validador(datos: list, validador: Callable[[Any], bool]) -> list:
@@ -42,10 +42,7 @@ def aplicar_validador(datos: list, validador: Callable[[Any], bool]) -> list:
     return [elemento for elemento in datos if validador(elemento)]
 
 
-def aplicar_validador_con_info(
-        datos: list,
-        validador: Callable[[Any], bool]
-) -> dict:
+def aplicar_validador_con_info(datos: list, validador: Callable[[Any], bool]) -> dict:
     """
     Versión extendida que retorna tanto los válidos como los inválidos.
 
@@ -72,13 +69,11 @@ def aplicar_validador_con_info(
         else:
             invalidos.append(elemento)
 
-    return {
-        'validos': validos,
-        'invalidos': invalidos
-    }
+    return {"validos": validos, "invalidos": invalidos}
 
 
 # ==================== VALIDADORES DE EMAIL ====================
+
 
 def es_email_valido(email: str) -> bool:
     """
@@ -103,7 +98,7 @@ def es_email_valido(email: str) -> bool:
         return False
 
     # Patrón básico de email
-    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    patron = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     return re.match(patron, email) is not None
 
 
@@ -121,14 +116,16 @@ def es_email_corporativo(email: str) -> bool:
         return False
 
     dominios_publicos = [
-        'gmail.com', 'yahoo.com', 'hotmail.com',
-        'outlook.com', 'live.com', 'icloud.com'
+        "gmail.com",
+        "yahoo.com",
+        "hotmail.com",
+        "outlook.com",
+        "live.com",
+        "icloud.com",
     ]
 
-    dominio = email.split('@')[1].lower()
+    dominio = email.split("@")[1].lower()
     return dominio not in dominios_publicos
-
-
 
 
 def es_mayor_a_10(numero: int) -> bool:
@@ -265,6 +262,7 @@ def contiene_solo_letras(texto: str) -> bool:
     """
     return isinstance(texto, str) and texto.isalpha()
 
+
 def es_lista_no_vacia(elemento: list) -> bool:
     """
     Valida que un elemento sea una lista no vacía.
@@ -372,10 +370,8 @@ def negar_validador(validador: Callable[[Any], bool]) -> Callable[[Any], bool]:
     return validador_invertido
 
 
-
 if __name__ == "__main__":
     print("=== Demostración de Funciones de Orden Superior ===\n")
-
 
     print("1. Validación de emails:")
     emails = [
@@ -383,7 +379,7 @@ if __name__ == "__main__":
         "email_invalido",
         "contacto@empresa.org",
         "sin_arroba.com",
-        "valido@dominio.co"
+        "valido@dominio.co",
     ]
     emails_validos = aplicar_validador(emails, es_email_valido)
     print(f"Emails originales: {emails}")
@@ -423,7 +419,7 @@ if __name__ == "__main__":
         "el_rosas@gmail.com",
         "david@empresa.com",
         "personal@yahoo.com",
-        "trabajo@miempresa.org"
+        "trabajo@miempresa.org",
     ]
     emails_corp = aplicar_validador(todos_emails, es_email_corporativo)
     print(f"Todos los emails: {todos_emails}")
