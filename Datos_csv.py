@@ -4,12 +4,12 @@ Calcula promedio, máximo y mínimo de columnas especificadas
 """
 
 import csv
-from rich.console import Console
-from rich.table import Table
-from rich.panel import Panel
-from rich import box
-from typing import Dict, List
 import os
+
+from rich import box
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
 
 console = Console()
 
@@ -35,11 +35,13 @@ def analizar_csv(nombre_archivo: str, columna: str) -> dict:
 
     valores = []
 
-    with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
+    with open(nombre_archivo, "r", encoding="utf-8") as archivo:
         lector = csv.DictReader(archivo)
 
         if lector.fieldnames is None:
-            raise ValueError(f"El archivo '{nombre_archivo}' está vacío o mal formado (no tiene encabezados).")
+            raise ValueError(
+                f"El archivo '{nombre_archivo}' está vacío o mal formado (no tiene encabezados)."
+            )
 
         if columna not in lector.fieldnames:
             raise ValueError(
@@ -58,17 +60,19 @@ def analizar_csv(nombre_archivo: str, columna: str) -> dict:
                 )
 
     if not valores:
-        raise ValueError(f"No se encontraron valores numéricos en la columna '{columna}'")
+        raise ValueError(
+            f"No se encontraron valores numéricos en la columna '{columna}'"
+        )
 
     promedio = sum(valores) / len(valores)
     maximo = max(valores)
     minimo = min(valores)
 
     return {
-        'promedio': promedio,
-        'maximo': maximo,
-        'minimo': minimo,
-        'total_registros': len(valores)
+        "promedio": promedio,
+        "maximo": maximo,
+        "minimo": minimo,
+        "total_registros": len(valores),
     }
 
 
@@ -80,7 +84,7 @@ def mostrar_resultados(resultados: dict, columna: str, archivo: str) -> None:
         title=f" Análisis de la columna: [cyan]{columna}[/cyan]",
         box=box.ROUNDED,
         show_header=True,
-        header_style="bold magenta"
+        header_style="bold magenta",
     )
 
     tabla.add_column("Estadística", style="cyan bold", width=20)
@@ -89,7 +93,7 @@ def mostrar_resultados(resultados: dict, columna: str, archivo: str) -> None:
     tabla.add_row("Promedio", f"{resultados['promedio']:.2f}")
     tabla.add_row("Máximo", f"{resultados['maximo']:.2f}")
     tabla.add_row("Mínimo", f"{resultados['minimo']:.2f}")
-    tabla.add_row("Total registros", str(resultados['total_registros']))
+    tabla.add_row("Total registros", str(resultados["total_registros"]))
 
     console.print()
     console.print(tabla)
@@ -101,7 +105,7 @@ def mostrar_datos_csv(nombre_archivo: str) -> None:
     Muestra todos los datos del archivo CSV en una tabla.
     """
     try:
-        with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
+        with open(nombre_archivo, "r", encoding="utf-8") as archivo:
             lector = csv.DictReader(archivo)
             filas = list(lector)
 
@@ -113,7 +117,7 @@ def mostrar_datos_csv(nombre_archivo: str) -> None:
                 title=f" Datos de: {nombre_archivo}",
                 box=box.SIMPLE,
                 show_header=True,
-                header_style="bold cyan"
+                header_style="bold cyan",
             )
 
             for columna in lector.fieldnames:
@@ -144,17 +148,19 @@ def crear_csv_ejemplo() -> None:
         {"nombre": "Sofía Torres", "edad": "19", "calificacion": "9.5"},
         {"nombre": "Diego Ramírez", "edad": "22", "calificacion": "8.1"},
         {"nombre": "Valentina Cruz", "edad": "21", "calificacion": "8.7"},
-        {"nombre": "Andrés Morales", "edad": "20", "calificacion": "7.9"}
+        {"nombre": "Andrés Morales", "edad": "20", "calificacion": "7.9"},
     ]
 
     try:
-        with open(nombre_archivo, 'w', newline='', encoding='utf-8') as archivo:
+        with open(nombre_archivo, "w", newline="", encoding="utf-8") as archivo:
             campos = ["nombre", "edad", "calificacion"]
             escritor = csv.DictWriter(archivo, fieldnames=campos)
             escritor.writeheader()
             escritor.writerows(datos)
 
-        console.print(f"[green]✓ Archivo '{nombre_archivo}' creado exitosamente[/green]")
+        console.print(
+            f"[green]✓ Archivo '{nombre_archivo}' creado exitosamente[/green]"
+        )
 
     except Exception as e:
         console.print(f"[bold red]✗ Error al crear archivo: {e}[/bold red]")
@@ -170,14 +176,16 @@ def main() -> None:
         "[bold cyan]Analizador de Archivos CSV[/bold cyan]\n"
         "[dim]Calcula estadísticas de columnas numéricas[/dim]",
         border_style="cyan",
-        box=box.DOUBLE
+        box=box.DOUBLE,
     )
     console.print(titulo)
     console.print()
 
     archivo = "estudiantes.csv"
     if not os.path.exists(archivo):
-        console.print("[yellow]⚠ No se encontró el archivo de ejemplo. Creando...[/yellow]\n")
+        console.print(
+            "[yellow]⚠ No se encontró el archivo de ejemplo. Creando...[/yellow]\n"
+        )
         crear_csv_ejemplo()
         console.print()
 
@@ -189,12 +197,16 @@ def main() -> None:
 
     for columna in columnas_a_analizar:
         try:
-            console.print(f"\n[bold magenta]→ Analizando columna: {columna}[/bold magenta]")
+            console.print(
+                f"\n[bold magenta]→ Analizando columna: {columna}[/bold magenta]"
+            )
             resultados = analizar_csv(archivo, columna)
             mostrar_resultados(resultados, columna, archivo)
 
         except Exception as e:
-            console.print(f"[bold red]✗ No se pudo analizar '{columna}': {e}[/bold red]")
+            console.print(
+                f"[bold red]✗ No se pudo analizar '{columna}': {e}[/bold red]"
+            )
 
     console.print("\n" + "=" * 70)
     console.print("[bold yellow]Ejemplo de manejo de errores:[/bold yellow]\n")
@@ -215,7 +227,7 @@ def main() -> None:
 [cyan]✓ Manejo de excepciones[/cyan]
 [cyan]✓ Rich para visualización[/cyan]""",
         title="[bold] Conceptos Aplicados[/bold]",
-        border_style="green"
+        border_style="green",
     )
     console.print(conceptos)
 
