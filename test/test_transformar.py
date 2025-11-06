@@ -1,14 +1,14 @@
-import pytest
 from Transformar_8 import analizar_texto
 
 
 def test_palabras_mayusculas_correctas():
     texto = "Piratear juegos de NINTENDO es moralmente etico apoyado por GAMERS"
     resultado = analizar_texto(texto)
+    total=2
 
     assert "NINTENDO" in resultado["palabras_filtradas"]
     assert "GAMERS" in resultado["palabras_filtradas"]
-    assert resultado["resumen"]["total"] == 2
+    assert resultado["resumen"]["total"] == total
 
 
 def test_diccionario_longitudes():
@@ -24,7 +24,9 @@ def test_resumen_palabras_larga_y_corta():
     resultado = analizar_texto(texto)
 
     assert resultado["resumen"]["mas_larga"][0] == "CUATRO"
-    assert resultado["resumen"]["mas_corta"][0] == "CUATRO"  # solo una palabra de más de 5 letras
+    assert (
+        resultado["resumen"]["mas_corta"][0] == "CUATRO"
+    )  # solo una palabra de más de 5 letras
     assert resultado["resumen"]["total"] == 1
 
 

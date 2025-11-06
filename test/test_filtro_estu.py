@@ -9,8 +9,9 @@ import Filtrado_estudiantes_filter_7
 def test_filtra_estudiantes_aprobados():
     """Verifica que solo los estudiantes con nota >= 3.0 sean filtrados."""
     estudiantes = [("Ana", 4.5), ("Juan", 2.8), ("Maria", 3.9)]
+    nota=3.0
 
-    resultado = list(filter(lambda x: x[1] >= 3.0, estudiantes))
+    resultado = list(filter(lambda x: x[1] >= nota, estudiantes))
 
     assert resultado == [("Ana", 4.5), ("Maria", 3.9)]
 

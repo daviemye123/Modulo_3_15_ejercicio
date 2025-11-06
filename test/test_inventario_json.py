@@ -50,10 +50,12 @@ def test_agregar_producto_agrega_un_item(mock_cat, mock_precio, mock_cant, mock_
     inventario = []
     with patch("inventario.guardar_inventario", return_value=True):
         result = agregar_producto(inventario)
+        precio=5.0
+        cantidad=10
     assert len(result) == 1
     assert result[0]["nombre"] == "Rosa"
-    assert result[0]["cantidad"] == 10
-    assert result[0]["precio"] == 5.0
+    assert result[0]["cantidad"] == cantidad
+    assert result[0]["precio"] == precio
 
 
 @patch("inventario.IntPrompt.ask", side_effect=[1, 3])
@@ -69,7 +71,8 @@ def test_vender_producto_resta_stock(mock_prompt):
     ]
     with patch("inventario.guardar_inventario", return_value=True):
         actualizado = vender_producto(inventario)
-    assert actualizado[0]["cantidad"] == 7
+        cantidad=7
+    assert actualizado[0]["cantidad"] == cantidad
 
 
 @patch("inventario.IntPrompt.ask", side_effect=[1, 15])

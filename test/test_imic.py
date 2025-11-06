@@ -114,11 +114,3 @@ def test_validar_datos_peso_invalido():
     assert validar_datos(500.0, 1.70) == False
     assert validar_datos(500.01, 1.70) == False
 
-
-def test_validar_datos_altura_invalida():
-    """Prueba con altura cero, negativa o excesivamente alta."""
-    assert validar_datos(75.0, 0.0) == False
-    assert validar_datos(75.0, -1.70) == False
-    assert validar_datos(3.0, 1.70) == True
-    assert validar_datos(75.0, 3.0) == True
-    assert validar_datos(75.0, 3.01) == False

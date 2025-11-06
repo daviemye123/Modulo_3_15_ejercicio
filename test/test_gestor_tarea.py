@@ -23,9 +23,10 @@ def test_agregar_y_ver_tareas():
     Gestor_tarea_archivo_txt.agregar_tarea("Hacer pytest")
 
     tareas = Gestor_tarea_archivo_txt.ver_tareas()
+    tarea=2
     assert "[ ] Estudiar Python" in tareas
     assert "[ ] Hacer pytest" in tareas
-    assert len(tareas) == 2
+    assert len(tareas) == tarea
 
 
 def test_eliminar_tarea():

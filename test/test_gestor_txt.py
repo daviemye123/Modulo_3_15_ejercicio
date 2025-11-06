@@ -34,7 +34,8 @@ def test_ver_tareas_devuelve_lista_correcta():
     agregar_tarea("Estudiar Python")
     agregar_tarea("Leer documentación")
     tareas = ver_tareas()
-    assert len(tareas) == 2
+    tarea=2
+    assert len(tareas) == tarea
     assert tareas[0].startswith("[ ]")
 
 
