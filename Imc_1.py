@@ -7,22 +7,21 @@ def clasificar_riesgo(imc):
     Returns:
         str: El nivel de riesgo clasificado.
     """
-    if imc < 16.0:
-        return " Delgadez severa"
-    elif imc < 17.0:
-        return " Delgadez moderada"
-    elif imc < 18.5:
-        return " Delgadez leve"
-    elif imc < 25.0:
-        return " Peso normal"
-    elif imc < 30.0:
-        return " Sobrepeso"
-    elif imc < 35.0:
-        return " Obesidad clase 1"
-    elif imc < 40.0:
-        return "R Obesidad clase 2"
-    else:
-        return "Obesidad clase 3"
+    rangos = [
+        (16.0, "Delgadez severa"),
+        (17.0, "Delgadez moderada"),
+        (18.5, "Delgadez leve"),
+        (25.0, "Peso normal"),
+        (30.0, "Sobrepeso"),
+        (35.0, "Obesidad clase 1"),
+        (40.0, "Obesidad clase 2"),
+    ]
+
+    for limite, clasificacion in rangos:
+        if imc < limite:
+            return clasificacion
+
+    return "Obesidad clase 3"
 
 
 def clasificar_imc(imc):
@@ -71,11 +70,13 @@ def calcular_imc(peso: float, altura: float) -> float:
 
 def validar_datos(peso: float, altura: float) -> bool:
     """Valida que los datos sean coherentes."""
+    altura1=3.0
+    peso1=500
     if peso <= 0 or altura <= 0:
         return False
-    if altura > 3.0:
+    if altura > altura1:
         return False
-    if peso > 500:
+    if peso > peso1:
         return False
     return True
 
