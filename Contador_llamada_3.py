@@ -8,7 +8,7 @@ Returns: retonando la funcion unterna que es incrementar
 def crear_contador():
     conteo = 0
     """
-    incrementa el conteo 
+    incrementa el conteo
     agr:varibale inicial de conteo estando en 0
     returns: retonando la funcion unterna que es incrementar
     """
@@ -23,7 +23,7 @@ def crear_contador():
 
 
 """
-limita el conteo hasta que llegue a 4 
+limita el conteo hasta que llegue a4
 arg:limite=4
 returns: retonando la funcion unterna que es incrementar
 """
