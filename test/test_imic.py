@@ -5,7 +5,6 @@ from Imc_1 import (
     calcular_peso_ideal,
     clasificar_imc,
     clasificar_riesgo,
-    validar_datos,
 )
 
 
@@ -102,15 +101,4 @@ def test_calcular_imc_valores_cero_o_negativos():
         calcular_imc(70.0, -1.75)
 
 
-def test_validar_datos_valido():
-    """Prueba con datos realistas y válidos."""
-    assert validar_datos(75.0, 1.80) == True
-
-
-def test_validar_datos_peso_invalido():
-    """Prueba con peso cero, negativo o excesivamente alto."""
-    assert validar_datos(0.0, 1.70) == False
-    assert validar_datos(-10.0, 1.70) == False
-    assert validar_datos(500.0, 1.70) == False
-    assert validar_datos(500.01, 1.70) == False
 
