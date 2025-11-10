@@ -172,11 +172,10 @@ def test_persistencia_prestamo(archivo_temporal, libros_con_datos):
     """Verifica que el préstamo se persista en el archivo."""
     prestar_libro(libros_con_datos, "001", "Test User", archivo_temporal)
 
-    # Cargar desde archivo
     with open(archivo_temporal, encoding="utf-8") as f:
         datos = json.load(f)
 
-    libro = next(l for l in datos if l["libro_id"] == "001")
+    libro = next(item for item in datos if item["libro_id"] == "001")
     assert libro["prestado_a"] == "Test User"
 
 
@@ -214,11 +213,11 @@ def test_persistencia_devolucion(archivo_temporal, libros_con_datos):
     """Verifica que la devolución se persista en el archivo."""
     devolver_libro(libros_con_datos, "002", archivo_temporal)
 
-    # Cargar desde archivo
     with open(archivo_temporal, encoding="utf-8") as f:
         datos = json.load(f)
 
-    libro = next(l for l in datos if l["libro_id"] == "002")
+
+    libro = next(item for item in datos if item["libro_id"] == "002")
     assert libro["prestado_a"] is None
 
 
@@ -290,7 +289,7 @@ def test_ver_multiples_prestados(archivo_temporal, libros_con_datos):
 def test_ver_todos_los_libros(libros_con_datos):
     """Verifica que se muestren todos los libros."""
     ver_todos_los_libros(libros_con_datos)
-    datos
+    datos=2
     assert len(libros_con_datos) == datos
 
 
