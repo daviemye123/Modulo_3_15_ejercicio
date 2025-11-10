@@ -11,8 +11,8 @@ from Sumatoria_reduce_9 import (
 def test_suma_numeros():
     """Verifica que la suma total con reduce sea correcta."""
     resultado = suma_numeros()
-    resultado=15
-    assert resultado == resultado, f"Se esperaba 15, pero se obtuvo {resultado}"
+    resultado1=15
+    assert resultado == resultado1, f"Se esperaba 15, pero se obtuvo {resultado}"
 
 
 def test_concatenar_strings():
