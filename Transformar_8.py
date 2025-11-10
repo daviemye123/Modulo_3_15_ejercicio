@@ -10,9 +10,11 @@ def analizar_texto(texto: str) -> dict:
         dict: Contiene las palabras filtradas, un diccionario con longitudes
               y resumen de estadísticas.
     """
+    palabras=5
 
     palabras_filtradas = [
-        palabra for palabra in texto.split() if len(palabra) > 5 and palabra.isupper()
+        palabra for palabra in texto.split() if len(palabra)
+         > palabras and palabra.isupper()
     ]
 
     diccionario_longitudes = {palabra: len(palabra) for palabra in palabras_filtradas}
