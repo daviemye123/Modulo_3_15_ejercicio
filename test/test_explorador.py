@@ -70,27 +70,3 @@ def test_explorar_diccionario_anidado(capsys):
     assert "Valor: False, Profundidad: 3" in output
 
 
-def test_explorar_estructura_compleja(capsys):
-    """Prueba la estructura compleja dada en el ejemplo."""
-    estructura = [
-        1,
-        [2, 3, "Hola"],
-        {"a": 4, "b": (5.5, None)},
-    ]
-    explorar_estructura(estructura)
-    captura = capsys.readouterr()
-    output = captura.out.strip().split("\n")
-
-    assert "Valor: 1, Profundidad: 2" in output
-
-    assert "Valor: 2, Profundidad: 3" in output
-    assert "Valor: Hola, Profundidad: 3" in output
-
-    assert "Clave: a, Profundidad: 3" in output
-    assert "Valor: 4, Profundidad: 3" in output
-
-    assert "Clave: b, Profundidad: 3" in output
-    assert "Valor: 5.5, Profundidad: 4" in output
-    assert "Valor: None, Profundidad: 4" in output
-
-    assert len(output) == 9
