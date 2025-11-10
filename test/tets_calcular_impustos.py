@@ -1,6 +1,6 @@
 import pytest
 
-from Calculadora_impuesto import actualizar_iva, calcular_iva
+from Calculadora_impuesto import TASA_IVA, actualizar_iva, calcular_iva
 
 
 @pytest.fixture(autouse=True)
@@ -9,8 +9,6 @@ def tasa_iva_restaurada():
     Asegura que la TASA_IVA comience en 0.19 antes de cada prueba
     y se restaure al finalizar.
     """
-    from Calculadora_impuesto import TASA_IVA
-
     tasa_inicial = TASA_IVA
     actualizar_iva(0.19)
     yield
