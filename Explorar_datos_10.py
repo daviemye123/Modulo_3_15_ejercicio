@@ -4,7 +4,8 @@ from typing import Any, Iterable
 def explorar_estructura(elemento: Any, profundidad: int = 1) -> None:
     """
     Explora recursivamente estructuras de datos anidadas (listas, tuplas, diccionarios)
-    e imprime los valores no-iterables (números, strings, booleanos, None) con su profundidad.
+    e imprime los valores no-iterables (números, strings, booleanos, None)
+    con su profundidad.
 
     Args:
         elemento: La estructura de datos a explorar (lista, dict, o un valor simple).
