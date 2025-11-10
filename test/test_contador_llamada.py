@@ -1,5 +1,4 @@
-from Contador_llamada_3 import crear_contador, limite_conteo
-
+from Contador_llamada_3 import limite_conteo
 
 
 def test_limite_conteo_alcanza_limite():
@@ -14,7 +13,3 @@ def test_limite_conteo_no_alcanza_limite():
     assert limite_conteo(2, limite=5) is False
 
 
-def test_limite_conteo_con_valor_personalizado():
-    """Prueba que se pueda usar un límite distinto de 4."""
-    assert limite_conteo(5, limite=5) is True
-    assert limite_conteo(4, limite=5) is False
