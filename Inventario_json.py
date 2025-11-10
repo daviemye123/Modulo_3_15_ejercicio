@@ -165,8 +165,9 @@ def mostrar_inventario(inventario, resumido=False):
         valor_producto = p["cantidad"] * p["precio"]
         total_productos += p["cantidad"]
         valor_total += valor_producto
+        cantidades=10
 
-        stock_style = "bold red" if p["cantidad"] < 10 else "yellow"
+        stock_style = "bold red" if p["cantidad"] < cantidades else "yellow"
 
         if resumido:
             tabla.add_row(
@@ -291,7 +292,8 @@ def main():
     console.clear()
     console.print(
         Panel.fit(
-            "[bold white] SISTEMA DE INVENTARIO [/bold white]\n[dim]Con persistencia JSON y Rich[/dim]",
+            "[bold white] SISTEMA DE INVENTARIO [/bold white]\n"
+            "[dim]Con persistencia JSON y Rich[/dim]",
             border_style="cyan",
             box=box.DOUBLE,
         )
