@@ -210,7 +210,8 @@ def generar_reporte(estudiantes: List[Dict], cursos: List[Dict], archivo_salida:
         with open(archivo_salida, "w", encoding="utf-8") as f:
             f.write(texto_reporte)
         console.print(
-            f"\n[green]✓[/green] Reporte guardado exitosamente en: [bold]{archivo_salida}[/bold]"
+            f"\n[green]✓[/green] Reporte guardado exitosamente en: "
+            f"[bold]{archivo_salida}[/bold]"
         )
     except Exception as e:
         console.print(f"[red]✗[/red] Error al guardar el reporte: {str(e)}")
@@ -219,13 +220,15 @@ def generar_reporte(estudiantes: List[Dict], cursos: List[Dict], archivo_salida:
 def main():
     """Función principal que ejecuta el proceso completo."""
     console.print(
-        "\n[bold blue]═══════════════════════════════════════════════════════[/bold blue]"
+        "\n[bold blue]═══════════════════════════════════════════════════════"
+        "[/bold blue]"
     )
     console.print(
         "[bold blue]    SISTEMA DE REPORTES - ESTUDIANTES Y CURSOS[/bold blue]"
     )
     console.print(
-        "[bold blue]═══════════════════════════════════════════════════════[/bold blue]\n"
+        "[bold blue]═══════════════════════════════════════════════════════"
+        "[/bold blue]\n"
     )
 
     # Archivos de entrada y salida
